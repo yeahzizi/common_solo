@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import AllIngredientsItem from './AllIngredientsItem';
 
-function AllIngredients() {
+function CategoryIngredients({ data }) {
   return (
-    <div>
-      
-    </div>
-  )
+    <ul>
+      {data &&
+        data.ingredients.map(item => (
+          <AllIngredientsItem key={item.id} item={item} />
+        ))}
+    </ul>
+  );
 }
 
-export default AllIngredients
+export default CategoryIngredients;

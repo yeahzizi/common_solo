@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function FavoriteIngredients() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <h3>즐겨찾기</h3>;
 }
 
-export default FavoriteIngredients
+export default FavoriteIngredients;

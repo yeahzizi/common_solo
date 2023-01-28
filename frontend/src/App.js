@@ -5,7 +5,7 @@ import Room from './pages/Room/Room';
 import Recipe from './pages/Recipe/RecipeDetail';
 import Rank from './pages/Rank/TemperatureRank';
 import Login from './pages/User/Login/Login';
-import Nav from './components/Nav/Nav';
+import MyIngredientsManage from './pages/MyIngredientsManage/MyIngredientsManage';
 
 function App() {
   return (
@@ -19,9 +19,8 @@ function App() {
         <Route path="/recipe" component={Recipe} />
         <Route path="/rank" component={Rank} />
         <Route path="/login" component={Login} />
+        <Route path="/MyIngredientsManage" component={MyIngredientsManage} />
       </Switch>
-      <Nav />
-      <hr />
     </div>
   );
 }

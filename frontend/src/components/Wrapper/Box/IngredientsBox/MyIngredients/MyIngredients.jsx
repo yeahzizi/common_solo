@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function MyIngredients() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <h3>내 냉장고 재료</h3>;
 }
 
-export default MyIngredients
+export default MyIngredients;
