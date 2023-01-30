@@ -1,44 +1,47 @@
 import React, { useState } from 'react';
-import dummy from '../ingredients.json';
+import styled from 'styled-components';
+import AllMyIngredientsModal from '../../../../Modal/AllMyIngredientsModal/AllMyIngredientsModal';
 
-function FavoriteIngredients({ category }) {
-  const categoryList = dummy.ingredients;
-  const [visible, setVisible] = useState(false);
-  const AllIngredient = categoryList.map(e => {
-    return <button key={e.id}>{e.name}</button>;
-  });
-  const ingredient = categoryList
-    .filter(i => i.id === category)
-    .map(i => {
-      return (
-        <button
-          key={i.id}
-          onClick={() => {
-            setVisible(!visible);
-          }}
-        >
-          {i.name}
-          {visible && (
-            <div>
-              <button>즐겨찾기</button>
-              <button>냉장고에서</button>
-            </div>
-          )}
-        </button>
-      );
-    });
-  if (category === 'all') {
-    return (
-      <span>
-        냉장고에 있는 재료 <div>{AllIngredient}</div>
-      </span>
-    );
+const Button = styled.button`
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #febd2f;
+  border-radius: 10px;
+  color: white;
+  font-weight: 200;
+  cursor: pointer;
+  &:hover {
+    background-color: #fac2be;
   }
+`;
+
+const AppWrap = styled.div`
+  text-align: right;
+  margin: auto;
+`;
+
+function MyIngredients() {
+  const [isOpen, setIsOpen] = useState(false);
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
   return (
     <span>
-      냉장고에 있는 재료 <div>{ingredient}</div>
+      <h3>내 냉장고에 있는 재료</h3>
+      <AppWrap>
+        <Button onClick={onClickButton}>냉장고 전체보기</Button>
+        {isOpen && (
+          <AllMyIngredientsModal
+            open={isOpen}
+            onClose={() => {
+              setIsOpen(false);
+            }}
+          />
+        )}
+      </AppWrap>
     </span>
   );
 }
 
-export default FavoriteIngredients;
+export default MyIngredients;

@@ -1,7 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 function CarouselBtn() {
-  return <div />;
+  return (
+    <div>
+      
+    </div>
+  )
 }
 
-export default CarouselBtn;
+export default CarouselBtn
