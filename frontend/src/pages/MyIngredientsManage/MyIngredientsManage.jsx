@@ -4,7 +4,6 @@ import Nav from '../../components/Nav/Nav';
 import FavoriteIngredients from '../../components/Wrapper/Box/IngredientsBox/FavoriteIngredients/FavoriteIngredients';
 import MyIngredients from '../../components/Wrapper/Box/IngredientsBox/MyIngredients/MyIngredients';
 import AllIngredients from '../../components/Wrapper/Box/IngredientsBox/AllIngredients/AllIngredients';
-// import Fridgedesign from '../../components/Modal/AllMyIngredientsModal/Fridgedesign';
 
 function MyIngredientsManage() {
   const [category, setCategory] = useState('all');
@@ -17,7 +16,6 @@ function MyIngredientsManage() {
       <FavoriteIngredients category={category} />
       <MyIngredients category={category} />
       <AllIngredients category={category} />
-      {/* <Fridgedesign /> */}
     </>
   );
 }
