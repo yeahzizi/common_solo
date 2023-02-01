@@ -1,21 +1,22 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import Mainlogo from '../../assets/img/mainlogo.png';
-import { Navbar, NavbarBlock } from './NavStyle';
+import { Navstyle, NavbarBlock, Line, Imgstyle, Loginstyle } from './NavStyle';
 
 function Nav() {
   return (
-    <NavbarBlock>
-      <Navbar>
-        <NavLink to="/Main">
+    <>
+      <NavbarBlock>
+        <Imgstyle to="/Main">
           <img src={Mainlogo} alt="mainlogo" width="72px" />
-        </NavLink>
-        <NavLink to="/SearchCookRoom">요리방</NavLink>
-        <NavLink to="/SearchRecipe">레시피</NavLink>
-        <NavLink to="/MyIngredients">냉장고</NavLink>
-        <NavLink to="/login">Login</NavLink>
-      </Navbar>
-    </NavbarBlock>
+        </Imgstyle>
+        <Navstyle to="/SearchCookRoom">요리방</Navstyle>
+        <Navstyle to="/SearchRecipe">레시피</Navstyle>
+        <Navstyle to="/MyIngredients">냉장고</Navstyle>
+        <Navstyle to="/Rank">랭킹</Navstyle>
+        <Loginstyle to="/Login">Login</Loginstyle>
+      </NavbarBlock>
+      <Line />
+    </>
   );
 }
 

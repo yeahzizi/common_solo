@@ -10,22 +10,22 @@ import dack from '../../assets/img/찜닭.jpg';
 
 const DUMMY_ROOM = [
   {
-    id: '1',
+    roomId: '1',
     king: '내가 요리왕',
     recipe: '찜닭',
-    title: '메인 찜닭해먹기',
+    roomName: '메인 찜닭해먹기',
     thumbnail: dack,
     startTime: new Date(),
     targetTime: new Date().getTime() + 10000,
     roomStatus: false,
-    anounce: null,
+    anounce: '맛있게 요리해먹기',
     users: 3,
   },
   {
-    id: '2',
+    roomId: '2',
     king: '내가 진짜 요리왕',
     recipe: '김치찌개',
-    title: '메인 김치찌개해먹기',
+    roomName: '메인 김치찌개해먹기',
     thumbnail: gim,
     startTime: new Date(),
     targetTime: new Date().getTime() + 10000,
