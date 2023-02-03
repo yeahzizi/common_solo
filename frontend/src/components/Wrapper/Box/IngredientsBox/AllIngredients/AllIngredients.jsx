@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-// import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
-// import KitchenRoundedIcon from '@mui/icons-material/KitchenRounded';
 import dummy from '../ingredients.json';
-import { Contents, Circle, Button, Wrapper } from './AllIngredientsStyle';
+import { Contents } from './AllIngredientsStyle';
 
 function AllIngredients({ category }) {
   const categoryList = dummy.ingredients;
@@ -16,26 +14,20 @@ function AllIngredients({ category }) {
     console.log(e.name);
     return (
       <span>
-        <Circle
+        <button
           key={e.name}
           onClick={() => {
             handleClick(e);
           }}
         >
-          {/* {selectIngredientId === e.name && visible && (
-            <>
-              <Button>즐겨찾기</Button>
-              <Button>내 냉장고</Button>
-            </>
-          )} */}
           {e.name}
           {selectIngredientId === e.name && visible && (
-            <Wrapper>
-              <Button>즐겨찾기</Button>
-              <Button>내 냉장고</Button>
-            </Wrapper>
+            <div>
+              <button>즐겨찾기</button>
+              <button>내 냉장고로</button>
+            </div>
           )}
-        </Circle>
+        </button>
       </span>
     );
   });
@@ -44,8 +36,8 @@ function AllIngredients({ category }) {
     .map(i => {
       return (
         <span>
-          <h4>{i.text} 전체</h4>
-          <Circle
+          <div>{i.text} 전체</div>
+          <button
             key={i.name}
             onClick={() => {
               handleClick(i);
@@ -53,12 +45,12 @@ function AllIngredients({ category }) {
           >
             {i.name}
             {selectIngredientId === i.name && visible && (
-              <>
-                <Button>즐겨찾기</Button>
-                <Button>내 냉장고</Button>
-              </>
+              <div>
+                <button>즐겨찾기</button>
+                <button>내 냉장고로</button>
+              </div>
             )}
-          </Circle>
+          </button>
         </span>
       );
     });

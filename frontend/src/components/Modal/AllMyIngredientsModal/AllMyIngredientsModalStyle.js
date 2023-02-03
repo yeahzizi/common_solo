@@ -38,14 +38,11 @@ export const CloseButton = styled.div`
 export const Contents = styled.div`
   text-align: center;
   margin: 50px;
-  width: 360px;
-  height: 400px;
   h2 {
     font-size: 30px;
     font-weight: 600;
     text-align: center;
     margin: auto;
-    margin-left: 14rem;
   }
 `;
 
@@ -66,8 +63,8 @@ export const Button = styled.button`
 
 export const Fridge = styled.div`
   position: absolute;
-  left: 33%;
-  top: 20%;
+  left: 50%;
+  top: 50%;
   width: 200px;
   height: 350px;
   border: 5px solid #febd2f;
