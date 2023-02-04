@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Main from './pages/Main/Main';
@@ -11,11 +11,25 @@ import MyIngredientsManage from './pages/MyIngredientsManage/MyIngredientsManage
 import Login from './pages/User/Login/Login';
 import Signin from './pages/User/SignIn/Signin';
 import Profile from './pages/User/Profile/Profile';
-// import RecipeRegister from './pages/Recipe/RecipeRegister';
+import RecipeRegister from './pages/Recipe/RecipeRegister';
+
+import RedirectPage from './utils/RedirectPage';
+import Footer from './components/Nav/Footer';
+import FloatBtn from './components/Btn/FloatBtn/FloatBtn';
+import StreamModal from './components/Modal/StreamModal/StreamModal';
 
 function App() {
+  const [modal, setModal] = useState(false);
+  const onOpneModal = () => {
+    setModal(true);
+  };
+  // 예지님!!!!!! 얘를 방송생성 모달에서 사용하시면 됩니다!!!!!!!!
+  const onCloseModal = () => {
+    setModal(false);
+  };
+
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Nav />
       <Switch>
         <Route path="/" exact>
@@ -26,13 +40,21 @@ function App() {
         <Route path="/SearchCookRoom" component={SearchCookRoom} />
         <Route path="/SearchRecipe" component={SearchRecipe} />
         <Route path="/Recipe/:recipeId" component={RecipeDetail} />
-        {/* <Route path="/RecipeRegister" component={RecipeRegister} /> */}
+        <Route path="/RecipeRegister" component={RecipeRegister} />
         <Route path="/Rank" component={TemperatureRank} />
         <Route path="/Login" component={Login} />
+        <Route path="/oauth/:redirect" component={RedirectPage} />
+        {/* <Route path="/oauth/kakao/callback">
+          <KAKAOAuth />
+        </Route> */}
         <Route path="/Signin" component={Signin} />
         <Route path="/Profile/:userId" component={Profile} />
         <Route path="/MyIngredients" component={MyIngredientsManage} />
       </Switch>
+      <FloatBtn onOpneModal={onOpneModal}>
+        <StreamModal />
+      </FloatBtn>
+      <Footer />
     </div>
   );
 }

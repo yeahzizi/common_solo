@@ -17,8 +17,8 @@ function AllMyIngredientsModal({ onClose }) {
     onClose?.();
   };
   return (
-    <Overlay>
-      <ModalWrap>
+    <Overlay onClick={handleClose}>
+      <ModalWrap onClick={e => e.stopPropagation()}>
         <CloseButton onClick={handleClose}>
           <CancelOutlinedIcon />
         </CloseButton>
@@ -30,8 +30,8 @@ function AllMyIngredientsModal({ onClose }) {
             </Door>
             <Shelves />
           </Fridge>
-          <Button>확인</Button>
         </Contents>
+        <Button>확인</Button>
       </ModalWrap>
     </Overlay>
   );
