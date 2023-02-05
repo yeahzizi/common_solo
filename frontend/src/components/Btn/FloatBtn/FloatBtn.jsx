@@ -6,7 +6,6 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import Backdrop from '@mui/material/Backdrop';
 import { Link } from 'react-router-dom';
-import StreamModal from '../../Modal/StreamModal/StreamModal';
 
 function FloatBtn(props) {
   const { onOpneModal, onCloseModal } = props;

@@ -1,20 +1,11 @@
-import React from 'react';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import { Overlay, ModalWrap, CloseButton } from './StreamModalStyle';
+import React from 'react'
 
-function StreamModal({ onCloseModal }) {
-  // const handleClose = () => {
-  //   onClose?.();
-  // };
+function StreamModal() {
   return (
-    <Overlay onClick={onCloseModal}>
-      <ModalWrap onClick={e => e.stopPropagation()}>
-        <CloseButton onClick={onCloseModal}>
-          <CancelOutlinedIcon />
-        </CloseButton>
-      </ModalWrap>
-    </Overlay>
-  );
+    <div>
+      
+    </div>
+  )
 }
 
-export default StreamModal;
+export default StreamModal

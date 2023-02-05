@@ -17,8 +17,8 @@ function AllMyIngredientsModal({ onClose }) {
     onClose?.();
   };
   return (
-    <Overlay onClick={handleClose}>
-      <ModalWrap onClick={e => e.stopPropagation()}>
+    <Overlay>
+      <ModalWrap>
         <CloseButton onClick={handleClose}>
           <CancelOutlinedIcon />
         </CloseButton>

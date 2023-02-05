@@ -16,7 +16,6 @@ import RecipeRegister from './pages/Recipe/RecipeRegister';
 import RedirectPage from './utils/RedirectPage';
 import Footer from './components/Nav/Footer';
 import FloatBtn from './components/Btn/FloatBtn/FloatBtn';
-import StreamModal from './components/Modal/StreamModal/StreamModal';
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -51,9 +50,7 @@ function App() {
         <Route path="/Profile/:userId" component={Profile} />
         <Route path="/MyIngredients" component={MyIngredientsManage} />
       </Switch>
-      <FloatBtn onOpneModal={onOpneModal}>
-        <StreamModal />
-      </FloatBtn>
+      <FloatBtn onOpneModal={onOpneModal} />
       <Footer />
     </div>
   );
