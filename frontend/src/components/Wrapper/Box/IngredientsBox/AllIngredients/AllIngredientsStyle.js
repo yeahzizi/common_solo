@@ -2,16 +2,18 @@ import styled from 'styled-components';
 
 export const Contents = styled.div`
   background: #fff8ea;
-  width: 624px;
   height: 172px;
   padding: 20px;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 0.3rem;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 2px;
     background: #febd2f;
+  }
+  @media screen and (max-width: 1024px) {
+    overflow-x: auto;
   }
 `;
 export const Icon = styled.div`
@@ -23,17 +25,15 @@ export const Icon = styled.div`
 `;
 
 export const Circle = styled.button`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #ffffff;
   font-size: smaller;
   text-align: center;
-  line-height: 60px;
-  /* white-space: normal;
-  word-break: break-all; */
+  line-height: 40px;
   /* margin-bottom: 1rem; */
-  margin: 1.5rem;
+  margin: 1rem;
   z-index: 1;
 `;
 

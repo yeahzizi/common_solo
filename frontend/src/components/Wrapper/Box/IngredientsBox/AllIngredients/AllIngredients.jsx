@@ -7,25 +7,34 @@ function AllIngredients({ category }) {
   const [visible, setVisible] = useState(false);
   const [selectIngredientId, setselectIngredientId] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const [allIngredient, setAllIngredient] = useState([]);
   const handleClick = i => {
-    setselectIngredientId(i.name);
+    setselectIngredientId(i);
     setVisible(!visible);
   };
+  const categoryKorean = dummy.categories
+    .filter(name => name.id === category)
+    .map(name => {
+      return <h4>{name.text} 전체</h4>;
+    });
+
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        const query = category;
+        let query = category;
+        if (query === 'ALL') {
+          query = '';
+        }
         const response = await axios.get(
           `http://i8b206.p.ssafy.io:9000/ingredient/list/total/${query}`
         );
-
         setIngredients([...response.data.map((v, a) => v.ingredientName)]);
-        console.log(ingredients);
+        // console.log(ingredients);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     };
-    fetchData();
+    getData();
   }, [category]);
 
   const ingredient = ingredients.map(i => {
@@ -49,39 +58,48 @@ function AllIngredients({ category }) {
     );
   });
 
-  // const AllIngredient = ingredients.map(e => {
-  //   console.log(e.name);
-  //   return (
-  //     <span>
-  //       <Circle
-  //         key={e.name}
-  //         onClick={() => {
-  //           handleClick(e);
-  //         }}
-  //       >
-  //         {/* {selectIngredientId === e.name && visible && (
-  //             <>
-  //               <Button>즐겨찾기</Button>
-  //               <Button>내 냉장고</Button>
-  //             </>
-  //           )} */}
-  //         {e.name}
-  //         {selectIngredientId === e.name && visible && (
-  //           <Wrapper>
-  //             <Button>즐겨찾기</Button>
-  //             <Button>내 냉장고</Button>
-  //           </Wrapper>
-  //         )}
-  //       </Circle>
-  //     </span>
-  //   );
-  // });
+  useEffect(() => {
+    const getAllData = async () => {
+      try {
+        const response = await axios.get(
+          'http://i8b206.p.ssafy.io:9000/ingredient/list/total'
+        );
+        setAllIngredient([...response.data.map((v, a) => v.ingredientName)]);
+        // console.log(ingredients);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getAllData();
+  }, [category]);
+
+  const AllIngredient = allIngredient.map(e => {
+    return (
+      <span>
+        <Circle
+          key={e}
+          onClick={() => {
+            handleClick(e);
+          }}
+        >
+          {e}
+          {selectIngredientId === e && visible && (
+            <Wrapper>
+              <Button>즐겨찾기</Button>
+              <Button>내 냉장고</Button>
+            </Wrapper>
+          )}
+        </Circle>
+      </span>
+    );
+  });
 
   if (category === 'ALL') {
     return (
       <div>
         <Contents>
-          전체{/* <h4>재료 전체</h4> <div>{AllIngredient}</div> */}
+          <h4>재료 전체</h4>
+          {AllIngredient}
         </Contents>
       </div>
     );
@@ -89,8 +107,17 @@ function AllIngredients({ category }) {
   return (
     <div>
       <Contents>
-        <h4>{category} 전체</h4>
+        {categoryKorean}
         {ingredient}
+        {/* {ingredientName.length === 0
+          ? ingredient
+          : ingredientName
+              .filter(
+                (element, index) => category === ingredientCategory[index]
+              )
+              .map((element, index) => {
+                return <div key={element}>{element}</div>;
+              })} */}
       </Contents>
     </div>
   );
