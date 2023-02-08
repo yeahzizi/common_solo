@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const CookRoomItemWrapper = styled.div`
   height: 25.5rem;
-  width: 21.6rem;
+  /* width: 21.6rem; */
+  /* background-color: rgba(255, 248, 234, 0.5); */
+  background-color: #fff8ea;
 `;
 
 export const CookRoomItemImg = styled.img`

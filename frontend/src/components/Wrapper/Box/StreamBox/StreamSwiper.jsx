@@ -6,7 +6,7 @@ import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Stack } from '@mui/material';
 
-import * as S from './streamItemStyle';
+import * as S from './StreamSwiperStyle';
 
 // MUI
 
@@ -17,23 +17,30 @@ import 'swiper/css/navigation';
 // eslint-disable-next-line
 import 'swiper/css/pagination';
 
-import gim from '../../../../assets/img/김찌.jpg';
-
 export default function StreamSwiper(props) {
   const { cookRoom } = props;
-
-  //   const StartTime = new Date(cookingRoomStartTime);
-  //   const hour = StartTime.getHours();
-  //   const minute = StartTime.getMinutes();
-  //   const START = `${hour}: ${minute}`;
 
   return (
     <Swiper
       modules={[Navigation]}
-      spaceBetween={48}
+      spaceBetween={20}
       slidesPerView={3}
       navigation
       grabCursor
+      breakpoints={{
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 50,
+        },
+      }}
       //   onSwiper={swiper => console.log(swiper)}
       // onSlideChange={() => console.log('slide change')}
     >
@@ -47,8 +54,7 @@ export default function StreamSwiper(props) {
               alignItems="center"
             >
               <S.CookRoomItemWrapper>
-                {/* <S.CookRoomItemImg src={room.cookingRoomImg} alt="img" /> */}
-                <S.CookRoomItemImg src={gim} alt="img" />
+                <S.CookRoomItemImg src={room.cookingRoomImg} alt="img" />
                 <S.StartUserWrapper>
                   <S.JoinUserWrapper>
                     <p>

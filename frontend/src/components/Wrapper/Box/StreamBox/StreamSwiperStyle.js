@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const CookRoomItemWrapper = styled.div`
-  height: 40rem;
-
-  border: 0.5px dashed #505050;
-  border-radius: 4px;
+  height: 25.5rem;
+  width: 21.6rem;
+  /* background-color: rgba(255, 248, 234, 0.5); */
+  background-color: #fff8ea;
 `;
 
 export const CookRoomItemImg = styled.img`
-  height: 160px;
-  width: 216px;
+  height: 60%;
+  width: 100%;
 `;
 
 export const KingWrapper = styled.div`
@@ -21,6 +21,8 @@ export const KingWrapper = styled.div`
     font-size: 12px;
     line-height: auto;
     color: #4f4f4f;
+  }
+  & img {
   }
 `;
 
@@ -40,12 +42,13 @@ export const StartTimeWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20px;
-  width: 75px;
   border-radius: 0.2rem;
   height: 20px;
-  width: 68px;
+  /* width: 68px; */
+  width: max-content;
+  min-width: 5rem;
   background-color: rgba(0, 0, 0, 0.5);
+
   & p {
     text-align: center;
     vertical-align: middle;
@@ -65,7 +68,6 @@ export const JoinUserWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 
   & p {
-    /* position: relative; */
     text-align: center;
     vertical-align: middle;
     font-size: 14px;
@@ -80,10 +82,12 @@ export const TagWrapper = styled.div`
   align-items: center;
   border-radius: 0.95rem;
   height: 19px;
-  width: 4rem;
+  width: max-content;
+  min-width: 5rem;
   background-color: #febd2f;
 
   & span {
+    font-family: 'Pretendard ExtraLight';
     text-align: center;
     vertical-align: middle;
     line-height: auto;

@@ -63,16 +63,16 @@ function Main() {
           <br />
           {isIn && (
             <div>
-              <h1>재료기반 추천</h1>
+              <h2>냉장고를 정리할 수 있는 절호의 기회!</h2>
               <StreamSwiper cookRoom={first} />
             </div>
           )}
           <div>
-            <h1>시간임박 추천</h1>
+            <h2>곧 시작해요! 얼른 들어오세요</h2>
             <StreamSwiper cookRoom={second} />
           </div>
           <div>
-            <h1>선호분야 추천</h1>
+            <h2>이 요리 좋아하지 않나요??</h2>
             <StreamSwiper cookRoom={third} />
           </div>
         </Stack>
