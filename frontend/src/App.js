@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Main from './pages/Main/Main';
@@ -16,30 +16,48 @@ import MakeCookRoom from './pages/MakeCookRoom/MakeCookRoom';
 import RedirectPage from './utils/RedirectPage';
 import Footer from './components/Nav/Footer';
 import FloatBtn from './components/Btn/FloatBtn/FloatBtn';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
+  const [isShow, setIsShow] = useState(true);
+  const onChangeShow = () => {
+    setIsShow(!isShow);
+  };
   return (
     <div style={{ position: 'relative' }}>
-      <Nav />
+      {isShow && <Nav />}
       <Switch>
         <Route path="/" exact>
           <Redirect to="/Main" />
         </Route>
-        <Route path="/Main" component={Main} exact />
-        <Route path="/Room/:roomId" component={Room} />
+        <Route path="/Main" exact>
+          <Route component={Main} onChangeShow={onChangeShow} isShow={isShow} />
+        </Route>
+        <Route path="/Room/:roomId">
+          <Room component={Room} onChangeShow={onChangeShow} />
+        </Route>
         <Route path="/SearchCookRoom" component={SearchCookRoom} />
         <Route path="/SearchRecipe" component={SearchRecipe} />
         <Route path="/RecipeRegister" component={RecipeRegister} />
         <Route path="/Rank" component={TemperatureRank} />
-        <Route path="/Login" component={Login} exact />
-        <Route path="/Login/oauth2/code/kakao" component={RedirectPage} />
-        <Route path="/Signin" component={Signin} />
+        <Route path="/Login" exact>
+          <Login component={Login} onChangeShow={onChangeShow} />
+        </Route>
+        <Route path="/Login/oauth2/code/kakao">
+          <RedirectPage component={RedirectPage} onChangeShow={onChangeShow} />
+        </Route>
+        <Route path="/Signin">
+          <Signin component={Signin} onChangeShow={onChangeShow} />
+        </Route>
         <Route path="/Profile/:userId" component={Profile} />
         <Route path="/MyIngredients" component={MyIngredientsManage} />
         <Route path="/MakeCookRoom" component={MakeCookRoom} />
+        <Route path="*">
+          <NotFound onChangeShow={onChangeShow} />
+        </Route>
       </Switch>
-      <FloatBtn />
-      <Footer />
+      {isShow && <FloatBtn />}
+      {isShow && <Footer />}
     </div>
   );
 }

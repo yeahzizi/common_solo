@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { Box } from '@mui/material';
 import { Line, FotterBlock, FotterPlace } from './FooterStyle';
 import Mainlogo from '../../assets/img/mainlogo.png';
@@ -6,10 +8,6 @@ import Mainlogo from '../../assets/img/mainlogo.png';
 function Footer() {
   return (
     <FotterPlace>
-      <br />
-      <br />
-      <br />
-      <br />
       <Line />
       <br />
       <br />

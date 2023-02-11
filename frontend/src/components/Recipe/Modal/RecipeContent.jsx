@@ -32,7 +32,7 @@ function RecipeDetailModalContent(props) {
 
   useEffect(async () => {
     const requestInfo = {
-      url: `http://i8b206.p.ssafy.io:9000/ingredient/list/${recipeId}`,
+      url: `http://i8b206.p.ssafy.io:9000/api/ingredient/list/${recipeId}`,
       method: 'GET',
     };
     try {
@@ -69,8 +69,8 @@ function RecipeDetailModalContent(props) {
         <Grid item xs={5} className="recipe-detail__information">
           <RecipeIngredients ingredients={ingredients} />
         </Grid>
-        <Grid item xs={2} />
-        <Grid item xs={5} className="recipe-detail__information">
+        <Grid item xs={1} />
+        <Grid item xs={6} className="recipe-detail__information">
           <RecipeOrders orders={recipeOrders} />
         </Grid>
       </Grid>
