@@ -3,8 +3,10 @@ import React from 'react';
 import { Grid } from '@mui/material';
 
 export default function CookEnterModalRenderContent(props) {
+  // Props
   const { ingredients } = props;
 
+  // function
   const buyIngredient = ingredient => {
     window.open(
       `https://front.homeplus.co.kr/express/search?entry=direct&keyword=${ingredient}`,
@@ -13,7 +15,6 @@ export default function CookEnterModalRenderContent(props) {
     );
   };
 
-  console.log(ingredients);
   return (
     <Grid
       container
@@ -23,21 +24,25 @@ export default function CookEnterModalRenderContent(props) {
       className="modal__ingredients-contents"
       justifyContent="space-evenly"
     >
-      {ingredients.map(({ ingredient: { ingredientId, ingredientName } }) => {
-        return (
-          <Grid item xs={6} key={ingredientId}>
-            <button
-              className="ingredient_button"
-              type="button"
-              onClick={() => {
-                buyIngredient(ingredientName);
-              }}
-            >
-              {ingredientName}
-            </button>
-          </Grid>
-        );
-      })}
+      {ingredients.map(
+        ({ ingredient: { ingredientId, ingredientName, ingredientIcon } }) => {
+          return (
+            <Grid item xs={6} key={ingredientId}>
+              <div className="ingredient_icon">
+                <img
+                  src={ingredientIcon}
+                  alt={`${ingredientName} 이미지`}
+                  onClick={() => {
+                    buyIngredient(ingredientName);
+                  }}
+                  aria-hidden
+                />
+              </div>
+              <p>{ingredientName}</p>
+            </Grid>
+          );
+        }
+      )}
     </Grid>
   );
 }

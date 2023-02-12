@@ -24,6 +24,7 @@ export const KingWrapper = styled.div`
   position: absolute;
   top: 195px;
   height: 14px;
+  align-items: flex-end;
 
   & p {
     text-align: left;
@@ -35,9 +36,10 @@ export const KingWrapper = styled.div`
     font-weight: 500;
   }
   .chefhat {
-    margin-left: 10px;
-    width: 10px;
-    height: 10px;
+    /* padding-right: 5px; */
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
   }
 `;
 
@@ -48,6 +50,12 @@ export const roomTitle = styled.h4`
   vertical-align: top;
   line-height: auto;
   color: #000000;
+  display: inline-block;
+
+  width: 130px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const StartUserWrapper = styled.div`
@@ -78,6 +86,9 @@ export const StartTimeWrapper = styled.div`
     font-size: 14px;
     line-height: auto;
     color: #ffffff;
+    @media (max-width: 1250px) {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -95,6 +106,7 @@ export const JoinUserWrapper = styled.div`
   width: max-content;
   min-width: 5rem;
   padding: 0 5px;
+
   & p {
     font-family: 'Pretendard Variable';
     font-weight: 600;
@@ -103,6 +115,9 @@ export const JoinUserWrapper = styled.div`
     font-size: 14px;
     line-height: auto;
     color: #ffffff;
+    @media (max-width: 1250px) {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -121,6 +136,6 @@ export const TagWrapper = styled.div`
   line-height: auto;
   color: black;
   width: max-content;
-  padding: 0 5px;
+  padding: 0 10px;
   font-weight: 600;
 `;

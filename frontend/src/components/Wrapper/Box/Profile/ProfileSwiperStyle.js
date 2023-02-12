@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HistoryStyle = styled.div`
-  height: 40rem;
+  /* height: 40rem; */
 
   border: 0.5px dashed #505050;
   border-radius: 4px;
@@ -29,6 +29,10 @@ export const HistoryStyle = styled.div`
   .history__title {
     margin-bottom: 1.6rem;
     cursor: pointer;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .cook {
@@ -52,10 +56,12 @@ export const HistoryStyle = styled.div`
 `;
 
 export const MyRecipeStyle = styled.div`
-  height: 36rem;
+  /* height: 36rem; */
 
   border: 0.5px dashed #505050;
   border-radius: 4px;
+
+  margin-bottom: 3.2rem;
 
   cursor: pointer;
 

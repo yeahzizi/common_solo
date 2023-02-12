@@ -22,7 +22,7 @@ export const ProfileInformationStyle = styled.form`
     border: none;
 
     font-family: 'Pretendard Bold';
-    font-size: 3.2rem;
+    font-size: 2.4rem;
 
     width: 50%;
 
@@ -57,6 +57,25 @@ export const ProfileInformationStyle = styled.form`
     margin-left: 0.8rem;
   }
 
+  #unfollow-button {
+    border-radius: 4px;
+    background-color: #dee2e6;
+
+    height: 3.2rem;
+
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+
+    font-family: 'Pretendard Regular';
+    font-size: 1.6rem;
+    color: black;
+  }
+
+  #unfollow-button:hover {
+    background-color: #adb5bd;
+    color: white;
+  }
+
   // 랭크, 온도, 선호
   .status {
     margin-top: 1.6rem;
@@ -64,13 +83,37 @@ export const ProfileInformationStyle = styled.form`
   }
 
   .item {
-    width: 60%;
+    width: 100%;
 
     text-align: center;
   }
 
   .icon img {
     width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .item {
+      width: 120%;
+
+      text-align: center;
+    }
+
+    .item img {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .item {
+      width: 200%;
+
+      text-align: center;
+    }
+
+    .item img {
+      width: 80%;
+    }
   }
 
   .item p {
@@ -90,6 +133,8 @@ export const ProfileInformationStyle = styled.form`
 
     display: flex;
     justify-content: center;
+
+    width: 100%;
   }
 
   // 메시지

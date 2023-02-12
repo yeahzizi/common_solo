@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import CookEnterModalRenderContent from './CookEnterModalRenderContent';
 
 export default function CookEnterModalMain(props) {
+  // Props
   const { recipeName, recipeIngredients, notHavingIngredients } = props;
-  const [clickedButton, setClickedButton] = useState('all');
 
-  console.log(clickedButton);
+  // useState
+  const [clickedButton, setClickedButton] = useState('all');
 
   return (
     <main>
@@ -17,7 +18,9 @@ export default function CookEnterModalMain(props) {
       <div className="modal__ingredients-box">
         <div className="change-button-box">
           <button
-            className="change-button all"
+            className={`change-button ${
+              clickedButton === 'all' ? 'active' : ''
+            }`}
             onClick={() => {
               setClickedButton('all');
             }}
@@ -25,7 +28,9 @@ export default function CookEnterModalMain(props) {
             전체 재료
           </button>
           <button
-            className="change-button no"
+            className={`change-button ${
+              clickedButton === 'no' ? 'active' : ''
+            }`}
             onClick={() => {
               setClickedButton('no');
             }}
