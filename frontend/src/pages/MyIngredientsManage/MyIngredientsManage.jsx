@@ -43,7 +43,6 @@ function MyIngredientsManage() {
     }
   };
   useEffect(() => {
-    console.log(enterdItme);
     if (enterdItme !== '') {
       getData();
     }
@@ -53,11 +52,10 @@ function MyIngredientsManage() {
   const favIngredient = i => {
     const inorOutIngredient = async target => {
       const sendIngredient = await axios.patch(
-        `https://i8b206.p.ssafy.io:9000/api/myIngredient/create/fav/1/${target}`,
-        // `https://i8b206.p.ssafy.io:9000/api/myIngredient/create/fav/${isLogin}/${target}`,
+        // `https://i8b206.p.ssafy.io:9000/api/myIngredient/create/fav/1/${target}`,
+        `https://i8b206.p.ssafy.io:9000/api/myIngredient/create/fav/${isLogin}/${target}`,
         {}
       );
-      console.log(sendIngredient.data);
       setFavIngre([...sendIngredient.data.map(v => v)]);
     };
     inorOutIngredient(i.ingredientId);
@@ -68,8 +66,8 @@ function MyIngredientsManage() {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/fav/1`,
-          // `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/fav/${isLogin}`,
+          // `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/fav/1`,
+          `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/fav/${isLogin}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -89,11 +87,10 @@ function MyIngredientsManage() {
   const sumbitIngredient = f => {
     const inorOutIngredient = async target => {
       const sendIngredient = await axios.patch(
-        `https://i8b206.p.ssafy.io:9000/api/myIngredient/update/1/${target}`,
-        // `https://i8b206.p.ssafy.io:9000/api/myIngredient/update/${isLogin}/${target}`,
+        // `https://i8b206.p.ssafy.io:9000/api/myIngredient/update/1/${target}`,
+        `https://i8b206.p.ssafy.io:9000/api/myIngredient/update/${isLogin}/${target}`,
         {}
       );
-      console.log(sendIngredient);
       setMyFridge([...sendIngredient.data.map(v => v)]);
     };
     inorOutIngredient(f.ingredientId);
@@ -104,11 +101,10 @@ function MyIngredientsManage() {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/total/1`
-          // `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/total/${isLogin}`
+          // `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/total/1`
+          `https://i8b206.p.ssafy.io:9000/api/myIngredient/list/total/${isLogin}`
         );
         setFridge([...response.data.map((v, a) => v)]);
-        console.log(fridge);
       } catch (e) {
         console.log(e);
       }
@@ -125,8 +121,8 @@ function MyIngredientsManage() {
           query = '';
         }
         const response = await axios.get(
-          `https://i8b206.p.ssafy.io:9000/api/ingredient/list/my/1/${query}`
-          // `https://i8b206.p.ssafy.io:9000/api/ingredient/list/my/${isLogin}/${query}`
+          // `https://i8b206.p.ssafy.io:9000/api/ingredient/list/my/1/${query}`
+          `https://i8b206.p.ssafy.io:9000/api/ingredient/list/my/${isLogin}/${query}`
         );
         setCategoryFridges([...response.data.map((v, a) => v)]);
       } catch (e) {
@@ -195,14 +191,6 @@ function MyIngredientsManage() {
     />,
   ];
 
-  // HTTP 요청 보내야 함
-  // 비동기 요청 보내기
-  // enterdItme 이 비어있으면 전체 (/room/list)
-  // enterdItme 값이 있으면 검색어 기반 (/room/search/{recipeName})
-  // useEffect(() => {
-  //   console.log(enterdItme);
-  // }, [enterdItme]);
-
   return (
     <>
       <br />
@@ -212,8 +200,8 @@ function MyIngredientsManage() {
       <br />
 
       <Contents>
-        <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1}>
-          {/* <Box gridColumn="span 1" /> */}
+        <Box display="grid" gridTemplateColumns="repeat(16, 1fr)" gap={1}>
+          <Box gridColumn="span 2" />
           <Box gridColumn="span 12">
             <SearchIngredient
               searchIngre={searchIngre}
@@ -221,10 +209,10 @@ function MyIngredientsManage() {
               sumbitIngredient={sumbitIngredient}
             />
           </Box>
-          {/* <Box gridColumn="span 1" /> */}
+          <Box gridColumn="span 2" />
         </Box>
-        <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1}>
-          {/* <Box gridColumn="span 1" /> */}
+        <Box display="grid" gridTemplateColumns="repeat(16, 1fr)" gap={1}>
+          <Box gridColumn="span 2" />
           <Box gridColumn="span 3">
             <IngredientsBox category={category} onSelect={onSelect} />
           </Box>
@@ -234,8 +222,7 @@ function MyIngredientsManage() {
               return component;
             })}
           </Box>
-          {/* <Box gridColumn="span 1" /> */}
-          {/* <Box gridColumn="span 1" /> */}
+          <Box gridColumn="span 2" />
         </Box>
       </Contents>
     </>

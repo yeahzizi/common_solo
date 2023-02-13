@@ -120,6 +120,7 @@ function Profile() {
     }
   }, [profileUserSeq]);
 
+  // 프로필 페이지 유저와 로그인 유저 일치 확인
   useEffect(() => {
     if (loginUserSeq === +profileUserSeq) {
       setIsAuthor(true);
@@ -132,7 +133,7 @@ function Profile() {
     <ProfileStyle>
       {/* {Object.keys(userData).length === 0 && <p>로딩 중!!!!!</p>} */}
       {state.userTemp !== null && (
-        <Stack spacing={5} className="profile">
+        <Stack spacing={3} className="profile">
           <UserInfoBox className="user-information-box">
             <ProfileImage
               image={state.userImg}

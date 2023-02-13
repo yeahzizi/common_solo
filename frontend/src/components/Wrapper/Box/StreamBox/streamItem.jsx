@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import * as S from './streamItemStyle';
 import ChefDeco from '../../../../assets/img/chef-deco.png';
@@ -8,10 +9,13 @@ import ChefDeco from '../../../../assets/img/chef-deco.png';
 import CookRoomEnterModal from '../../../Modal/CookRoomEnterModal/CookRoomEnterModal';
 
 function StreamItem({ room }) {
+  const history = useHistory();
   // CookRoomEnterModal
   const [isCookRoomEnterModalOpened, setIsCookRoomEnterModalOpened] =
     useState(false);
-
+  const userSeq = useSelector(state => {
+    return state.user.userSeq;
+  });
   const {
     cookingRoomId,
     cookingRoomImg,
@@ -22,8 +26,15 @@ function StreamItem({ room }) {
     recipe,
   } = room;
   const StartTime = new Date(cookingRoomStartTime);
-  const hour = StartTime.getHours();
-  const minute = StartTime.getMinutes();
+  let hour = StartTime.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minute = StartTime.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+  console.log(minute);
   const START = `${hour}:${minute}`;
   return (
     <S.CookRoomItemWrapper>
@@ -31,24 +42,36 @@ function StreamItem({ room }) {
         src={cookingRoomImg}
         alt="img"
         onClick={() => {
-          setIsCookRoomEnterModalOpened(true);
+          if (userSeq) {
+            setIsCookRoomEnterModalOpened(true);
+          } else {
+            history.push('/login');
+          }
         }}
       />
       <S.StartUserWrapper
         onClick={() => {
-          setIsCookRoomEnterModalOpened(true);
+          if (userSeq) {
+            setIsCookRoomEnterModalOpened(true);
+          } else {
+            history.push('/login');
+          }
         }}
       >
         <S.JoinUserWrapper>
           <p>요리사 {userJoinLists ? userJoinLists.length : 0}명</p>
         </S.JoinUserWrapper>
         <S.StartTimeWrapper>
-          <p>{START} 시작</p>
+          <p>{START}시작</p>
         </S.StartTimeWrapper>
       </S.StartUserWrapper>
       <S.roomTitle
         onClick={() => {
-          setIsCookRoomEnterModalOpened(true);
+          if (userSeq) {
+            setIsCookRoomEnterModalOpened(true);
+          } else {
+            history.push('/login');
+          }
         }}
       >
         {cookingRoomName}

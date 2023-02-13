@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import * as S from './StreamSwiperStyle';
 import ChefHat from '../../../Rank/ChefHat';
@@ -7,13 +9,43 @@ import ChefDeco from '../../../../assets/img/chef-deco.png';
 
 function StreamSwiperItem(props) {
   const { room } = props;
+  const history = useHistory();
+
   const [isCookRoomEnterModalOpened, setIsCookRoomEnterModalOpened] =
     useState(false);
+
+  const userSeq = useSelector(state => {
+    return state.user.userSeq;
+  });
 
   let isDto = false;
   if (room.cookingRoomDto) {
     isDto = true;
   }
+  let hour;
+  let minute;
+  if (isDto) {
+    const startTime = new Date(room.cookingRoomDto.cookingRoomStartTime);
+    hour = startTime.getHours();
+    minute = startTime.getMinutes();
+    if (hour < 10) {
+      hour = `0${hour}`;
+    }
+    if (minute < 10) {
+      minute = `0${minute}`;
+    }
+  } else {
+    const startTime = new Date(room.cookingRoomStartTime);
+    hour = startTime.getHours();
+    minute = startTime.getMinutes();
+    if (hour < 10) {
+      hour = `0${hour}`;
+    }
+    if (minute < 10) {
+      minute = `0${minute}`;
+    }
+  }
+  const START = `${hour}:${minute}`;
 
   return (
     <>
@@ -30,12 +62,20 @@ function StreamSwiperItem(props) {
             }
             alt="img"
             onClick={() => {
-              setIsCookRoomEnterModalOpened(true);
+              if (userSeq) {
+                setIsCookRoomEnterModalOpened(true);
+              } else {
+                history.push('/login');
+              }
             }}
           />
           <S.StartUserWrapper
             onClick={() => {
-              setIsCookRoomEnterModalOpened(true);
+              if (userSeq) {
+                setIsCookRoomEnterModalOpened(true);
+              } else {
+                history.push('/login');
+              }
             }}
           >
             <S.JoinUserWrapper>
@@ -54,30 +94,16 @@ function StreamSwiperItem(props) {
               )}
             </S.JoinUserWrapper>
             <S.StartTimeWrapper>
-              {isDto ? (
-                <p>
-                  {`${new Date(
-                    room.cookingRoomDto.cookingRoomStartTime
-                  ).getHours()}:${new Date(
-                    room.cookingRoomDto.cookingRoomStartTime
-                  ).getMinutes()}`}
-                  시작
-                </p>
-              ) : (
-                <p>
-                  {`${new Date(
-                    room.cookingRoomStartTime
-                  ).getHours()}:${new Date(
-                    room.cookingRoomStartTime
-                  ).getMinutes()}`}
-                  시작
-                </p>
-              )}
+              <p>{START}시작</p>
             </S.StartTimeWrapper>
           </S.StartUserWrapper>
           <S.roomTitle
             onClick={() => {
-              setIsCookRoomEnterModalOpened(true);
+              if (userSeq) {
+                setIsCookRoomEnterModalOpened(true);
+              } else {
+                history.push('/login');
+              }
             }}
           >
             {isDto ? room.cookingRoomDto.cookingRoomName : room.cookingRoomName}
