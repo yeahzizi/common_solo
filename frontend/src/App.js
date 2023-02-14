@@ -52,14 +52,18 @@ function App() {
           <Login component={Login} onChangeShow={onChangeShow} />
         </Route>
         <Route path="/Login/oauth2/code/kakao">
-          <RedirectPage component={RedirectPage} onChangeShow={onChangeShow} />
+          <RedirectPage
+            component={RedirectPage}
+            onChangeShow={onChangeShow}
+            isShow={isShow}
+          />
         </Route>
         <Route path="/Signin">
           <Signin component={Signin} onChangeShow={onChangeShow} />
         </Route>
         <Route path="/Profile/:userId" component={Profile} />
         <Route path="/MyIngredients" component={MyIngredientsManage}>
-          {userSeq ? <MyIngredientsManage /> : <Redirect to="/Login" />}
+          {/* {userSeq ? <MyIngredientsManage /> : <Redirect to="/Login" />} */}
         </Route>
         <Route path="/MakeCookRoom" component={MakeCookRoom} />
         <Route path="*">

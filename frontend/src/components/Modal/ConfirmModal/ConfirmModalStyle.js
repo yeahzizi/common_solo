@@ -7,8 +7,9 @@ export const ReportTitle = styled.div`
   font-weight: 700;
   font-size: 3vw;
   width: 100%;
+
   text-align: center;
-  margin-bottom: 1vw;
+  margin-bottom: 4vh;
 `;
 export const FormBox = styled.div`
   width: 100%;
@@ -27,15 +28,15 @@ export const ReportWrite = styled.div`
   align-items: center;
 `;
 export const ReportBtnWrap = styled.div`
-  width: 40%;
-  height: 100%;
+  width: 30%;
+  height: 10%;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
 `;
 export const ReportBtn = styled.button`
-  width: 40%;
-  height: 40%;
+  width: 25%;
+  height: 15%;
   border-radius: 3px;
 `;
