@@ -13,6 +13,7 @@ import UserModel from './models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
 import { thisTypeAnnotation } from '@babel/types';
 import VerticalC, { data } from './verticalCarousel/VerticalC';
+import ConfirmModal from '../Modal/ConfirmModal/ConfirmModal';
 // mui import
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -59,6 +60,10 @@ class CookRoom extends Component {
       isHost: false,
       carouselIdx: 0,
       isReport: false,
+      enteredNum: -1,
+      killPopup: false,
+      // 강퇴한 유저
+      killedUser: '',
     };
     this.DelRoomRequestInfo = this.DelRoomRequestInfo.bind(this);
     this.modalOpen = this.modalOpen.bind(this);
@@ -70,6 +75,7 @@ class CookRoom extends Component {
     this.micStatusChanged = this.micStatusChanged.bind(this);
     this.kickStatusChanged = this.kickStatusChanged.bind(this);
     this.killUser = this.killUser.bind(this);
+    this.killPopup = this.killPopup.bind(this);
     this.getRecipe = this.getRecipe.bind(this);
     // 방장인지 확인
     this.isHost = this.isHost.bind(this);
@@ -174,6 +180,11 @@ class CookRoom extends Component {
     }
   }
 
+  // 강퇴 시 팝업창 생성
+  killPopup() {
+    this.setState({ killPopup: !this.state.killPopup });
+  }
+
   // 레시피 chat에서 가져오기
 
   getRecipe(getInfo) {
@@ -272,7 +283,24 @@ class CookRoom extends Component {
 
   updateSubscribers() {
     var subscribers = this.remotes;
-    console.log(subscribers);
+    console.log(
+      subscribers.map(v => {
+        return v.nickname;
+      })
+    );
+    if (this.props.userInfo.userSeq === null) {
+      this.leaveSession();
+      alert('로그인이 필요합니다. 로그인 이후 이용해주세요');
+      window.location = '/Main';
+    }
+    if (this.state.enteredNum === -1 && subscribers.length > 5) {
+      this.leaveSession();
+      alert('방 인원이 초과되어 입장이 불가능합니다. 다른 방을 이용해주세요:)');
+      window.location = '/Main';
+    } else {
+      this.setState({ enteredNum: subscribers.length });
+    }
+    console.log(subscribers.length);
 
     this.setState(
       {
@@ -295,7 +323,7 @@ class CookRoom extends Component {
   async roomStart() {
     const requestInfo = {
       url: `https://i8b206.p.ssafy.io:9000/api/room/start/${this.state.mySessionId}`,
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         Authorization: `Bearer ${this.props.userInfo.accessToken}`,
       },
@@ -346,13 +374,14 @@ class CookRoom extends Component {
     this.setState({ kicktrigger: !this.state.kicktrigger });
   }
   killUser(userName) {
+    this.setState({ killedUser: userName });
     const signalOptions = {
       data: userName,
       type: 'kickout',
     };
     this.remotes = this.remotes.filter(v => v.nickname !== userName);
-
     this.state.session.signal(signalOptions);
+    this.killPopup();
   }
 
   // 다음 단계로 넘어가기
@@ -406,6 +435,7 @@ class CookRoom extends Component {
           'custom-class'
         );
       });
+
       const newUser = new UserModel();
       newUser.setStreamManager(subscriber);
       newUser.setConnectionId(event.stream.connection.connectionId);
@@ -737,6 +767,37 @@ class CookRoom extends Component {
           userNum={this.state.subscribers.length + 1}
           thisRoom={this.props.roomId}
         />
+        {this.state.killPopup && (
+          <div>
+            <Modal
+              open={this.state.killPopup}
+              onClose={() => this.killPopup()}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '40%',
+                  height: '30%',
+                  bgcolor: '#FFFFFF',
+                  border: '2px solid #ffffff',
+                  boxShadow: 24,
+                  borderRadius: '16px',
+                  p: 4,
+                }}
+              >
+                <ConfirmModal
+                  info={`${this.state.killedUser}를 내보냈습니다`}
+                  killPopup={this.killPopup}
+                />
+              </Box>
+            </Modal>
+          </div>
+        )}
         {this.state.isReport && (
           <div>
             <Modal
@@ -764,6 +825,7 @@ class CookRoom extends Component {
                   userInfo={this.props.userInfo}
                   subscribers={this.state.subscribers}
                   isReport={this.isReport}
+                  onChangeShow={this.props.onChangeShow}
                 />
               </Box>
             </Modal>
@@ -864,6 +926,7 @@ class CookRoom extends Component {
                                 nowFocus={this.state.nowVideo}
                                 key={i}
                                 user={sub}
+                                killPopup={this.killPopup}
                                 streamId={sub.streamManager.stream.streamId}
                                 kicktrigger={
                                   sub !== localUser && this.state.kicktrigger
